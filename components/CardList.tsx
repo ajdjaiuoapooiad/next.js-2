@@ -1,14 +1,19 @@
 import React from 'react'
 import CardItem from './CardItem'
+import { PostData } from '@/app/types/type'
 
 
-
-const CardList = () => {
+interface CardListProps {
+  posts: PostData[]
+}
+const CardList = ({posts}: CardListProps) => {
   return (
     <>
-        <CardItem />
-        <CardItem />
-        <CardItem />
+    
+        {posts.map((post: PostData) => (
+          <CardItem key={post.id} p={post} />
+        ))}
+
     </>
   )
 }
