@@ -6,7 +6,7 @@ import { PostData } from '@/app/types/type'
 
 
 interface CardProps {
-  p: PostData[]
+  p: PostData
 }
 const CardItem = ({p}: CardProps) => {
   const {id, title, content, createdAt} = p
