@@ -5,7 +5,7 @@ import React from 'react'
 import { PostData } from './types/type'
 
 
-export const getStaticProps = async () => {
+export async function getData() {
   const res = await fetch('http://localhost:3000/api/posts', {
     cache: 'no-store'
   })
@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
 }
 
 const Home = async () => {
-  const data = await getStaticProps()
+  const data = await getData()
 
   return (
     <div className='grid lg:grid-cols-3 p-4 gap-4'>
