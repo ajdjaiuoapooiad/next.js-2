@@ -7,14 +7,14 @@ export const GET = async (req: Request) =>  {
     return NextResponse.json(posts)
 }
 
-export const POST = async (req: Request) =>  {  
-    const { title, content } = await req.json()
+// export const POST = async (req: Request) =>  {  
+//     const { title, content } = await req.json()
 
-    const posts = await prisma.post.create({
-        data: {
-            title,
-            content,
-        }
-    })
-    return NextResponse.json(posts)
-}
+//     const posts = await prisma.post.create({
+//         data: {
+//             title,
+//             content,
+//         }
+//     })
+//     return NextResponse.json(posts)
+// }

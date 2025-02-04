@@ -10,14 +10,18 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { z } from 'zod'
+import { post } from '../actions/actions'
 
 
-const formSchema = z.object({
-    title: z.string().min(2, {
-      message: "Username must be at least 2 characters.",
-    }),
-    content: z.string(),
-})
+export const formSchema = z.object({
+    title: z
+      .string()
+      .min(2, { message: "タイトルは2文字以上で入力してください。" }),
+    content: z
+      .string()
+      .min(10, { message: "本文は10文字以上で入力してください。" })
+      .max(140, { message: "本文は140文字以内で入力してください。" }),
+  });
   
 const CreatePage = () => {
     const router = useRouter()
@@ -26,27 +30,14 @@ const CreatePage = () => {
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          title: '',
-          content: '',
+          title: "",
+          content: "",
         },
-      })
+      });
 
      async function onSubmit(values: z.infer<typeof formSchema>) {
-        const { title, content } = values;
-        try {
-            await fetch('http://localhost:3000/api/posts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({title, content}),
-            })
-            router.push('/')
-            router.refresh()
-        }  catch (error) {
-            console.log(error);
-            
-        }
+        const { title, content } = values
+        post({title, content})
     }
 
   return (
@@ -74,7 +65,11 @@ const CreatePage = () => {
                     <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                        <Textarea />
+                    <Textarea
+                    placeholder="投稿内容"
+                    className="resize-none"
+                    {...field}
+                    />
                     </FormControl>
                     
                     <FormMessage />
