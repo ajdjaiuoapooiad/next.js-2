@@ -7,7 +7,7 @@ export const GET = async (
     {params}: {params: {id: string}}
 ) =>  {
     const id = params.id
-    const post = prisma.post.findUnique({
+    const post = await prisma.post.findUnique({
         where: { id: parseInt(id) },
     })
     return NextResponse.json(post)

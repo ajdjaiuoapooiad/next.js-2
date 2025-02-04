@@ -18,11 +18,20 @@ export async function getData(id: number) {
 
 const ShowPage = async ({params}: {params: {id: number}}) => {
     const post = await getData(params.id);
+    const {title, content} = post
     console.log(post);
     
 
   return (
-    <div>ShowPage</div>
+    <div className='max-auto max-w-4xl p-4'>
+        <div className='mb-8'>
+            <h1 className='text-2xl font-bold'>{title}</h1>
+            <p className='text-gray-700'>{content}</p>
+        </div>
+        <div className='mb-8'>
+            <p className='text-gray-900'>{content}</p>
+        </div>
+    </div>
   )
 }
 
